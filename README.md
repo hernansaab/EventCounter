@@ -1,5 +1,8 @@
 # **Event Counter Library**
-This library allows you to track events and count the number of events that occurred in a time window
+This library allows you to track events and count the number of events that occurred in a time window.  
+This library allows for EventCounter public methods to be invoked concurrently in different threads.  
+
+
 ###Installing Event Counter
 
 ####Add file github.sbt to path $HOME/.sbt/1.0 with the following content (required by github):

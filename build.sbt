@@ -17,9 +17,14 @@ resolvers += ("Artima Maven Repository" at "http://repo.artima.com/releases").wi
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.1.1"
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.1" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.1.1" % Test
 
 libraryDependencies += "org.scalamock" %% "scalamock" % "4.4.0" % Test
+
+
+// https://mvnrepository.com/artifact/org.apache.spark/spark-core
+// for memory estimation
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.5"
 
 
 // disable publishing the main jar produced by `package`

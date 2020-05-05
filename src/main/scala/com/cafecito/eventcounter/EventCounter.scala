@@ -1,5 +1,10 @@
 package com.cafecito.eventcounter
 
+/**
+ * CurrentTimeMsImplementation and CurentTimeMs are built for testing
+ * This class wraps System.currentTimeMillis() to allow for overriding times during testing
+ */
+
 trait CurentTimeMs {
   def currentTimeMillis(): Long
 }
@@ -8,6 +13,25 @@ class CurrentTimeMsImplementation extends CurentTimeMs {
   override def currentTimeMillis(): Long = System.currentTimeMillis()
 }
 
+/**
+ * EventCounter
+ * There are two public methods signal() and countEvents()
+ * Both methods can be invoked independently in different threads, provided object is already constructed
+ * Size of EventCounter
+ *  This object contains two arrays, timeWindow[Int] contains the count for each second timeslot and
+ *    the other, timeWindowLastUpdated[Long] keeps track of last updated time for each second timeslot
+ *    Size in bytes: timeWindowInSeconds * 4 + timeWindowInSeconds * 8
+ * Total memory usage (bytes) = 100 + timeWindowInSeconds * 4 + timeWindowInSeconds * 8
+ * Example if we construct object from new EventCounter(300) it would occupy the following amount of memory
+ *    Size in bytes = 100 + 300*4 + 300*8 = 3700 bytes
+ *
+ * Performance of EventCounter
+ *  signal() takes constant time to run. It is always fast and there are no iterators used.
+ *  countEvents(n) takes time proportional to n to run
+ *
+ * @param timeWindowInSeconds
+ * @param currentTimeMs
+ */
 class EventCounter(timeWindowInSeconds: Int)(implicit currentTimeMs: CurentTimeMs = new CurrentTimeMsImplementation) {
   if (timeWindowInSeconds <= 0) {
     throw new Error(f"Values less or equal to zero not accepted in constructor. timeWindowInSeconds set to $timeWindowInSeconds")

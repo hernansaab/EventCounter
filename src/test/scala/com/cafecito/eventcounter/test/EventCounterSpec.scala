@@ -7,6 +7,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 /**
  * Test spec for EventCounter
  * There is one true unit test case (because System.currentTimeMillis() is mocked) at the end of this spec.
+ * There is also a memory footprint test to ensure there are no memory leaks
  *
  */
 class EventCounterSpec extends AnyFlatSpec  with MockFactory {
@@ -25,7 +26,7 @@ class EventCounterSpec extends AnyFlatSpec  with MockFactory {
     }
   }
 
-  it should "Work with small increments of 100 ms" in {
+  it should "work with small increments of 100 ms" in {
     val eventCounter = new EventCounter(3)
     signalNTimes(eventCounter, 5)
     Thread.sleep(100)
@@ -50,7 +51,7 @@ class EventCounterSpec extends AnyFlatSpec  with MockFactory {
     assert(eventCounter.countEvents(2) == 4)
 
   }
-  it should "Small time window of 3 seconds" in {
+  it should "work with small time window of 3 seconds" in {
     val eventCounter = new EventCounter(3)
     eventCounter.signal()
     assert(eventCounter.countEvents(1) == 1)
@@ -77,7 +78,7 @@ class EventCounterSpec extends AnyFlatSpec  with MockFactory {
     assert(eventCounter.countEvents(1) == 0)
     assert(eventCounter.countEvents(0) == 0)
   }
-  it should "Small time window of 1 seconds" in {
+  it should "work with very small time window of 1 seconds" in {
     val eventCounter = new EventCounter(1)
     eventCounter.signal()
     assert(eventCounter.countEvents(1) == 1)
@@ -103,11 +104,20 @@ class EventCounterSpec extends AnyFlatSpec  with MockFactory {
     assert(eventCounter.countEvents(1) == 1)
   }
 
+  it should "have stable memory footprint" in {
+    import org.apache.spark.util.SizeEstimator
+    val eventCounter = new EventCounter(10)
+    val size = SizeEstimator.estimate(eventCounter)
+    eventCounter.signal()
+    eventCounter.signal()
+    eventCounter.countEvents(5)
+    assert(SizeEstimator.estimate(eventCounter) == size)
+  }
+
   it should "Work even if signal occurs before current time due to high concurrency" in {
 
     val timeMsMock: CurentTimeMs = stub[CurentTimeMs]
     val eventCounter = new EventCounter(3)(timeMsMock)
-
     (timeMsMock.currentTimeMillis _).when().returns(12000L).twice()
     signalNTimes(eventCounter, 2)
     (timeMsMock.currentTimeMillis _).when().returns(11000L).once()
