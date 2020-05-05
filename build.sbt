@@ -24,7 +24,7 @@ libraryDependencies += "org.scalamock" %% "scalamock" % "4.4.0" % Test
 
 // https://mvnrepository.com/artifact/org.apache.spark/spark-core
 // for memory estimation
-libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.5"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.4.5" % Test
 
 
 // disable publishing the main jar produced by `package`

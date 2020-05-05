@@ -3,6 +3,7 @@ package com.cafecito.eventcounter.test
 import com.cafecito.eventcounter.{CurentTimeMs, EventCounter}
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.flatspec.AnyFlatSpec
+import org.apache.spark.util.SizeEstimator
 
 /**
  * Test spec for EventCounter
@@ -105,7 +106,6 @@ class EventCounterSpec extends AnyFlatSpec  with MockFactory {
   }
 
   it should "have stable memory footprint" in {
-    import org.apache.spark.util.SizeEstimator
     val eventCounter = new EventCounter(10)
     val size = SizeEstimator.estimate(eventCounter)
     eventCounter.signal()
