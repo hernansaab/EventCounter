@@ -16,8 +16,11 @@ credentials +=
 ```
      
 #### Add the following to your build.sbt file
-`libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
-`
+```sbt
+externalResolvers += "ExampleLibrary packages" at "https://maven.pkg.github.com/cafecito/sbt-github-packages"
+
+libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
+```
 
 ### Usage
 #### 
