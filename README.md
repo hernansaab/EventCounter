@@ -25,7 +25,8 @@ libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
 ### Usage
 #### 
 ```scala
-import com.hernansaab.EventCounter
+import com.cafecito.eventcounter.EventCounter
+
 
 // Constructs event counter with time window of 20 seconds
 val eventCounter = new EventCounter(20)
