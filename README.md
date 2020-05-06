@@ -2,6 +2,8 @@
 This library allows you to track events and count the number of events that occurred in a time window.  
 This library allows for EventCounter public methods to be invoked concurrently in different threads.  
 
+SBT version supported 1.X. 
+Scala Version supported 12.X. 
 
 ### Installing Event Counter
 
