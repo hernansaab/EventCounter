@@ -5,11 +5,11 @@ package com.cafecito.eventcounter
  * This class wraps System.currentTimeMillis() to allow for overriding times during testing
  */
 
-trait CurentTimeMs {
+protected trait CurentTimeMs {
   def currentTimeMillis(): Long
 }
 
-class CurrentTimeMsImplementation extends CurentTimeMs {
+private class CurrentTimeMsImplementation extends CurentTimeMs {
   override def currentTimeMillis(): Long = System.currentTimeMillis()
 }
 
