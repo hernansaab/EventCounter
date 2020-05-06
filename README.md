@@ -3,9 +3,9 @@ This library allows you to track events and count the number of events that occu
 This library allows for EventCounter public methods to be invoked concurrently in different threads.  
 
 
-###Installing Event Counter
+### Installing Event Counter
 
-####Add file github.sbt to path $HOME/.sbt/1.0 with the following content (required by github):
+#### Add file github.sbt to path $HOME/.sbt/1.0 with the following content (required by github):
 ```
 credentials +=
    Credentials(
@@ -15,11 +15,11 @@ credentials +=
      "8e9787e2c79e65bfe53c9601d194d3f173b231d5")
 ```
      
-####Add the following to your build.sbt file
+#### Add the following to your build.sbt file
 `libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
 `
 
-###Usage
+### Usage
 #### 
 ```scala
 import com.hernansaab.EventCounter
