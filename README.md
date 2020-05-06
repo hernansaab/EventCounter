@@ -12,7 +12,7 @@ credentials +=
      "GitHub Package Registry",
      "maven.pkg.github.com",
      "hernansaab",
-     "6a0205be9aa015129935ada8fc6f794f59de39c9")
+     "31906be397daf1d0ce6f3929285b364071807024")
 ```
      
 #### Add the following to your build.sbt file
