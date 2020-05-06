@@ -3,26 +3,30 @@ This library allows you to track events and count the number of events that occu
 This library allows for EventCounter public methods to be invoked concurrently in different threads.  
 
 
-###Installing Event Counter
+### Installing Event Counter
 
-####Add file github.sbt to path $HOME/.sbt/1.0 with the following content (required by github):
+#### Add file github.sbt to path $HOME/.sbt/1.0 with the following content (required by github):
 ```
 credentials +=
    Credentials(
      "GitHub Package Registry",
      "maven.pkg.github.com",
      "hernansaab",
-     "8e9787e2c79e65bfe53c9601d194d3f173b231d5")
+     "token_you_should_have")
 ```
      
-####Add the following to your build.sbt file
-`libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
-`
+#### Add the following to your build.sbt file
+```sbt
+externalResolvers += "ExampleLibrary packages" at "https://maven.pkg.github.com/cafecito/sbt-github-packages"
 
-###Usage
+libraryDependencies += "com.cafecito" %% "eventcounter" % "0.2.0-SNAPSHOT"
+```
+
+### Usage
 #### 
 ```scala
-import com.hernansaab.EventCounter
+import com.cafecito.eventcounter.EventCounter
+
 
 // Constructs event counter with time window of 20 seconds
 val eventCounter = new EventCounter(20)
@@ -36,7 +40,6 @@ eventCounter.signal()
 val countedEvents = eventCounter.countEvents(2)
 
 // Should display "3 events occurred 2 seconds ago"  
-
 println(f"$countedEvents events occurred 2 seconds ago")
 
 ```
