@@ -40,7 +40,6 @@ eventCounter.signal()
 val countedEvents = eventCounter.countEvents(2)
 
 // Should display "3 events occurred 2 seconds ago"  
-
 println(f"$countedEvents events occurred 2 seconds ago")
 
 ```
